@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1769aa">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="여행 준비물">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+  <title>여행 준비물</title>
+  <style>
+    :root{--blue:#1769aa;--ink:#17324d;--muted:#6b7d90;--line:#d9e3ec;--soft:#eef6fc;--done:#8b99a5;--safe-bottom:env(safe-area-inset-bottom)}
+    *{box-sizing:border-box}html{background:#f4f8fb}body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:16px;line-height:1.45;padding-bottom:calc(88px + var(--safe-bottom))}
+    .app{max-width:720px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px 20px}.brand{display:flex;align-items:center;gap:10px}.brand h1{font-size:25px;margin:0}.subtitle{margin:4px 0 18px;color:var(--muted)}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 5px 18px #17324d0b}.panel h2{font-size:18px;margin:0 0 12px}.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.choice-grid.three{grid-template-columns:repeat(3,1fr)}button,input{font:inherit}button{border:0;cursor:pointer}.choice{min-height:48px;border:2px solid var(--line);background:#fff;border-radius:12px;color:var(--ink);font-weight:700;padding:8px}.choice[aria-pressed=true]{border-color:var(--blue);background:var(--soft);color:var(--blue)}.nights{display:flex;align-items:center;justify-content:space-between;gap:12px}.stepper{display:flex;align-items:center;gap:14px}.stepper button{width:48px;height:48px;border-radius:50%;background:var(--blue);color:#fff;font-size:25px}.night-value{min-width:70px;text-align:center;font-size:22px;font-weight:800}.primary{width:100%;min-height:50px;border-radius:12px;background:var(--blue);color:white;font-weight:800;margin-top:13px}.progress-head{display:flex;justify-content:space-between;font-weight:800}.progress-track{height:12px;background:#e6edf3;border-radius:99px;overflow:hidden;margin-top:10px}.progress-fill{height:100%;background:linear-gradient(90deg,#1769aa,#41a1dc);width:0%;transition:width .2s}.category{margin:18px 0 0}.category-title{font-size:18px;margin:0 0 7px}.item{display:flex;align-items:center;gap:11px;min-height:52px;padding:9px 10px;border-top:1px solid var(--line);background:#fff;cursor:pointer;user-select:none}.item:first-of-type{border-radius:12px 12px 0 0}.item:last-of-type{border-radius:0 0 12px 12px}.item input{width:23px;height:23px;accent-color:var(--blue);flex:0 0 auto}.item-main{min-width:0;flex:1}.item-name{font-weight:700}.item-count{color:var(--blue);font-weight:800;white-space:nowrap}.item.done{color:var(--done);background:#f7f9fa}.item.done .item-name{text-decoration:line-through}.empty{color:var(--muted);padding:12px 0}.add-row{display:grid;grid-template-columns:1fr 90px 70px;gap:8px}.add-row input{min-height:48px;border:1px solid var(--line);border-radius:10px;padding:0 12px;min-width:0}.help{font-size:14px;color:var(--muted);margin:9px 0 0}.fixed-actions{position:fixed;z-index:5;bottom:0;left:0;right:0;padding:10px 16px calc(10px + var(--safe-bottom));background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:9px}.fixed-actions button{min-height:48px;border-radius:12px;font-weight:800}.secondary{background:#eaf2f8;color:var(--blue)}.modal{position:fixed;inset:0;background:#10233580;display:none;align-items:flex-end;z-index:10}.modal.open{display:flex}.sheet{width:100%;max-width:720px;margin:auto auto 0;background:#fff;border-radius:20px 20px 0 0;padding:20px 18px calc(22px + var(--safe-bottom));max-height:85vh;overflow:auto}.sheet h2{margin-top:0}.close{width:100%;min-height:48px;border-radius:12px;background:var(--blue);color:#fff;font-weight:800;margin-top:12px}.toast{position:fixed;z-index:20;left:50%;bottom:calc(100px + var(--safe-bottom));transform:translateX(-50%);background:#17324d;color:#fff;padding:10px 14px;border-radius:999px;display:none;white-space:nowrap}.toast.show{display:block}@media(max-width:430px){.choice-grid.three{grid-template-columns:1fr}.add-row{grid-template-columns:1fr 76px 64px}}
+    .success-banner{display:none;background:#e8f8ee;border:1px solid #9bd4ad;color:#176b38;border-radius:16px;padding:15px 16px;margin:12px 0;font-weight:800;text-align:center}.success-banner.show{display:block}.category-summary{width:100%;min-height:52px;border:1px solid #b7d8c0;border-radius:12px;background:#f2fbf5;color:#176b38;text-align:left;padding:9px 12px;font-weight:800;display:flex;align-items:center;justify-content:space-between}.category-summary small{font-weight:600;color:#4f8060}
+  </style>
+</head>
+<body>
+<main class="app">
+  <header><div class="brand" title="두 번 누르면 설치 안내가 열립니다."><span aria-hidden="true">🧳</span><h1>여행 준비물</h1></div><p class="subtitle">조건을 고르면 필요한 준비물이 나타납니다. 설치 안내는 제목을 두 번 누르세요.</p></header>
+  <section class="panel" aria-labelledby="condition-title"><h2 id="condition-title">여행 조건</h2>
+    <div class="choice-grid" role="group" aria-label="지역"><button class="choice" data-key="region" data-value="국내" aria-pressed="false">국내</button><button class="choice" data-key="region" data-value="해외" aria-pressed="true">해외</button></div>
+    <div class="choice-grid three" role="group" aria-label="계절"><button class="choice" data-key="season" data-value="봄가을" aria-pressed="true">봄가을</button><button class="choice" data-key="season" data-value="여름" aria-pressed="false">여름</button><button class="choice" data-key="season" data-value="겨울" aria-pressed="false">겨울</button></div>
+    <div class="choice-grid" role="group" aria-label="동반자"><button class="choice" data-key="companion" data-value="성인" aria-pressed="true">혼자·성인</button><button class="choice" data-key="companion" data-value="아이동반" aria-pressed="false">아이 동반</button></div>
+    <div class="nights"><strong>여행 기간</strong><div class="stepper"><button id="minus" aria-label="박 수 줄이기">−</button><div class="night-value"><span id="nights">2</span>박</div><button id="plus" aria-label="박 수 늘리기">+</button></div></div>
+    <button class="primary" id="calculate">준비물 계산하기</button>
+  </section>
+  <section class="panel" aria-label="진행률"><div class="progress-head"><span id="progressText">0 / 0개 챙김</span><span id="progressPercent">0%</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></section>
+  <div class="success-banner" id="successBanner" role="status">모두 챙겼습니다! 즐거운 여행 되세요 🎉</div>
+  <section id="list" aria-live="polite"></section>
+  <section class="panel"><h2>직접 추가</h2><div class="add-row"><input id="customName" maxlength="40" placeholder="예: 여행용 자물쇠" aria-label="추가할 물건 이름"><input id="customCount" type="number" min="1" max="99" value="1" aria-label="개수"><button class="primary" id="addCustom" style="margin:0">추가</button></div><p class="help">직접 추가한 물건은 조건을 바꿔도 목록 끝에 남습니다.</p></section>
+</main>
+<nav class="fixed-actions" aria-label="하단 기능"><button class="secondary" id="toggleRemaining">남은 것만 보기</button><button class="primary" id="shareRemaining" style="margin:0">남은 목록 공유</button></nav>
+<div class="modal" id="installModal" role="dialog" aria-modal="true" aria-labelledby="installTitle"><div class="sheet"><h2 id="installTitle">앱 설치 안내</h2><h3>안드로이드</h3><p>Chrome에서 앱을 연 뒤 메뉴에서 <b>앱 설치</b> 또는 <b>홈 화면에 추가</b>를 누르세요.</p><h3>아이폰</h3><p>Safari에서 앱을 연 뒤 <b>공유</b> 버튼을 누르고 <b>홈 화면에 추가</b>를 선택하세요.</p><p class="help">설치 기능은 HTTPS 또는 localhost에서 사용할 수 있습니다.</p><button class="close" id="closeInstall">닫기</button></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+// 준비물 규칙은 이 배열 한 곳에서만 관리합니다.
+const RULES = [
+  ['여권','서류','해외',1],['항공권·예약확인서','서류','해외',1],['신분증','서류','항상',1],['여행자보험 증서','서류','해외',1],['현금·카드','서류','항상',1],
+  ['멀티 어댑터','전자기기','해외',1],['휴대폰 충전기','전자기기','항상',1],['보조배터리','전자기기','항상',1],['이어폰','전자기기','항상',1],['카메라','전자기기','항상',1],
+  ['속옷','의류','항상','일수+1'],['양말','의류','항상','일수+1'],['상의','의류','항상','일수'],['하의','의류','항상','올림(일수/2)'],['잠옷','의류','항상',1],['겉옷','의류','항상',1],['수영복','의류','여름',1],['모자','의류','여름',1],['선글라스','의류','여름',1],['패딩·두꺼운 외투','의류','겨울',1],['목도리·장갑','의류','겨울',1],['내복','의류','겨울',1],
+  ['칫솔·치약','세면','항상',1],['샴푸·바디워시','세면','항상',1],['수건','세면','국내',2],['화장품·스킨케어','세면','항상',1],['자외선 차단제','세면','여름',1],
+  ['상비약','건강','항상',1],['반창고','건강','항상',1],['마스크','건강','항상','일수'],['벌레 물린 데 바르는 약','건강','여름',1],['핫팩','건강','겨울',2],
+  ['우산·우비','기타','항상',1],['장바구니·에코백','기타','항상',1],['비닐봉지','기타','항상',3],['아이 간식·물티슈','기타','아이동반',1],['유아차·아기띠','기타','아이동반',1],
+  ['여권 사본·비상 연락처','서류','해외',1],['여행용 자물쇠','기타','항상',1],['빨래망·세탁 세제','기타','항상',1],['물병','기타','항상',1],['안대·귀마개','기타','항상',1]
+].map(([name,category,condition,rule])=>({name,category,condition,rule}));
+const CATEGORIES=['서류','전자기기','의류','세면','건강','기타'];
+const KEY='travel-packing-v1';
+const CUSTOM_KEY='travel-packing-custom-v1';
+const CHECKED_KEY='travel-packing-checked-v1';
+const saved=JSON.parse(localStorage.getItem(KEY)||'null')||{conditions:{region:'해외',season:'봄가을',companion:'성인',nights:2},remainingOnly:false};
+const oldCustom=Array.isArray(saved.custom)?saved.custom:[];
+const oldChecked=Array.isArray(saved.checked)?saved.checked:[];
+const storedCustom=localStorage.getItem(CUSTOM_KEY);
+const storedChecked=localStorage.getItem(CHECKED_KEY);
+// 직접 추가한 물건과 체크 기록은 조건 선택과 별도의 저장소에 보관합니다.
+let state={
+  conditions:{region:'해외',season:'봄가을',companion:'성인',nights:2,...(saved.conditions||{})},
+  remainingOnly:Boolean(saved.remainingOnly),
+  custom:storedCustom===null?oldCustom:JSON.parse(storedCustom),
+  checked:storedChecked===null?oldChecked:JSON.parse(storedChecked)
+};
+const $=s=>document.querySelector(s); const esc=s=>String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function persist(){
+  // 조건과 보기 상태만 조건 저장소에 기록합니다.
+  localStorage.setItem(KEY,JSON.stringify({conditions:state.conditions,remainingOnly:state.remainingOnly}));
+  // 직접 추가 항목과 체크 기록은 조건을 바꿔도 절대 덮어쓰지 않습니다.
+  localStorage.setItem(CUSTOM_KEY,JSON.stringify(state.custom));
+  localStorage.setItem(CHECKED_KEY,JSON.stringify(state.checked));
+}
+function quantity(rule){if(typeof rule==='number')return rule;if(rule==='일수')return state.conditions.nights;if(rule==='일수+1')return state.conditions.nights+1;if(rule==='올림(일수/2)')return Math.ceil(state.conditions.nights/2);return 1;}
+function applicable(item){return item.condition==='항상'||item.condition===state.conditions.region||item.condition===state.conditions.season||(item.condition==='아이동반'&&state.conditions.companion==='아이동반');}
+function allItems(){
+  const matched=RULES.filter(applicable).map(x=>({...x,count:quantity(x.rule),custom:false}));
+  // 조건과 무관한 직접 추가 목록을 항상 마지막에 붙입니다.
+  const custom=state.custom.map(x=>({...x,category:'기타',custom:true,count:x.count,condition:'직접 추가'}));
+  return matched.concat(custom);
+}
+const expandedCompleted=new Set();
+function render(){
+  const items=allItems();
+  const allDone=items.length>0&&items.every(x=>state.checked.includes(x.name));
+  $('#successBanner').classList.toggle('show',allDone);
+  let html='';
+  for(const category of CATEGORIES){
+    const categoryItems=items.filter(x=>x.category===category);
+    if(!categoryItems.length)continue;
+    const doneCount=categoryItems.filter(x=>state.checked.includes(x.name)).length;
+    const complete=doneCount===categoryItems.length;
+    const expanded=expandedCompleted.has(category);
+    if(complete&&!expanded){
+      html+=`<section class="category"><button class="category-summary" data-expand-category="${category}"><span>${category} ${doneCount}/${categoryItems.length} 완료</span><small>눌러서 펼치기</small></button></section>`;
+      continue;
+    }
+    const rows=state.remainingOnly?categoryItems.filter(x=>!state.checked.includes(x.name)):categoryItems;
+    html+=`<section class="category"><h2 class="category-title">${category}${complete?` <small>(${doneCount}/${categoryItems.length} 완료)</small>`:''}</h2>`;
+    for(const x of rows){const done=state.checked.includes(x.name);html+=`<div class="item ${done?'done':''}" data-name="${esc(x.name)}" role="checkbox" aria-checked="${done}"><input type="checkbox" tabindex="-1" ${done?'checked':''} aria-label="${esc(x.name)}"><div class="item-main"><div class="item-name">${esc(x.name)}</div><small>${esc(x.condition)}</small></div><span class="item-count">${x.count}개</span></div>`}
+    html+='</section>';
+  }
+  $('#list').innerHTML=html||'<div class="panel empty">남은 준비물이 없습니다.</div>';
+  updateProgress(items);
+}
+function updateProgress(items=allItems()){const done=items.filter(x=>state.checked.includes(x.name)).length;const total=items.length;const pct=total?Math.round(done/total*100):0;$('#progressText').textContent=`${done} / ${total}개 챙김`;$('#progressPercent').textContent=`${pct}%`;$('#progressFill').style.width=pct+'%';$('#toggleRemaining').textContent=state.remainingOnly?'전체 보기':'남은 것만 보기';}
+function syncControls(){document.querySelectorAll('.choice').forEach(b=>b.setAttribute('aria-pressed',b.dataset.value===state.conditions[b.dataset.key]));$('#nights').textContent=state.conditions.nights;}
+function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1800)}
+document.addEventListener('click',e=>{const b=e.target.closest('.choice');if(b){state.conditions[b.dataset.key]=b.dataset.value;persist();syncControls();render();return}const summary=e.target.closest('[data-expand-category]');if(summary){const category=summary.dataset.expandCategory;if(expandedCompleted.has(category))expandedCompleted.delete(category);else expandedCompleted.add(category);render();return}const row=e.target.closest('.item');if(row){const n=row.dataset.name;state.checked=state.checked.includes(n)?state.checked.filter(x=>x!==n):[...state.checked,n];persist();render();}});
+$('#minus').onclick=()=>{state.conditions.nights=Math.max(1,state.conditions.nights-1);persist();syncControls();render()};$('#plus').onclick=()=>{state.conditions.nights=Math.min(13,state.conditions.nights+1);persist();syncControls();render()};$('#calculate').onclick=()=>{render();toast('준비물 목록을 다시 계산했습니다.')};
+$('#addCustom').onclick=()=>{const name=$('#customName').value.trim();const count=Number($('#customCount').value);if(!name||!Number.isInteger(count)||count<1){toast('품목 이름과 개수를 확인해 주세요.');return}if(state.custom.some(x=>x.name===name)||RULES.some(x=>x.name===name)){toast('이미 있는 품목입니다.');return}state.custom.push({name,count});$('#customName').value='';$('#customCount').value=1;persist();render();toast('준비물을 추가했습니다.')};
+$('#toggleRemaining').onclick=()=>{state.remainingOnly=!state.remainingOnly;persist();render()};
+$('#shareRemaining').onclick=async()=>{const text=allItems().filter(x=>!state.checked.includes(x.name)).map(x=>`□ ${x.name} ${x.count}개`).join('\n')||'모든 준비물을 챙겼습니다.';try{if(navigator.share)await navigator.share({title:'여행 준비물',text});else throw new Error('no share')}catch(e){if(e.name==='AbortError')return;try{await navigator.clipboard.writeText(text);toast('남은 목록을 복사했습니다.')}catch(_){toast('공유 기능을 사용할 수 없습니다.')}}};
+$('#installModal').addEventListener('click',e=>{if(e.target.id==='installModal'||e.target.id==='closeInstall')$('#installModal').classList.remove('open')});
+// 설치 안내는 공유 버튼을 두 번 누르는 방식으로 열어 하단 버튼을 단순하게 유지합니다.
+let lastInstallTap=0;document.querySelector('.brand').addEventListener('dblclick',()=>$('#installModal').classList.add('open'));
+syncControls();render();
+if(('https:'===location.protocol||location.hostname==='localhost')&&'serviceWorker'in navigator){
+  // sw.js 자체를 브라우저 캐시에서 읽지 않고 새 버전을 확인합니다.
+  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>registration.update()).catch(()=>{});
+  // 새 서비스 워커가 활성화되면 현재 화면도 새 파일로 한 번만 다시 엽니다.
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(!window.__pwaReloading){window.__pwaReloading=true;location.reload();}
+  });
+}
+</script>
+</body></html>

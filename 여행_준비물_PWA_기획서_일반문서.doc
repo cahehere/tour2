@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>여행 준비물 PWA 기획서</title>
+<style>
+body{font-family:Malgun Gothic,Arial,sans-serif;line-height:1.7;margin:40px;color:#222}h1{color:#173b67;border-bottom:3px solid #173b67;padding-bottom:10px}h2{color:#245b8f;margin-top:28px}h3{color:#444}table{border-collapse:collapse;width:100%;margin:12px 0 22px}th,td{border:1px solid #aaa;padding:7px;text-align:left}th{background:#eaf2f8}li{margin:4px 0}.note{background:#fff8dc;padding:12px;border-left:4px solid #e0b400}
+</style>
+</head>
+<body>
+<h1>「여행 준비물」 모바일 앱(PWA) 기획서</h1>
+<h2>1. 한 줄 소개</h2>
+<p>여행 기간, 지역, 계절, 동반자 조건을 고르면 필요한 준비물과 개수를 자동으로 계산하고, 체크 기록을 휴대폰에만 저장하는 여행 준비물 체크 PWA다.</p>
+<h2>2. 휴대폰 화면 구성</h2>
+<ol><li><b>조건 고르기:</b> 여행 기간(박 수), 해외·국내, 여름·겨울, 혼자·아이동반을 선택한다.</li><li><b>진행 막대:</b> 준비 완료 항목 수와 전체 항목 수를 표시한다.</li><li><b>분류별 목록:</b> 서류, 전자기기, 의류, 세면, 건강, 기타 순서로 표시한다. 한 줄 전체를 눌러 체크한다.</li><li><b>직접 추가:</b> 품목 이름과 개수를 입력해 기타 목록에 추가한다.</li></ol>
+<p><b>화면 아래 고정 버튼:</b> 「전체 초기화」, 「설치 안내」</p>
+<h2>3. 기능별 요구사항</h2>
+<table><tr><th>기능</th><th>입력</th><th>처리</th><th>출력</th><th>검증 규칙</th></tr>
+<tr><td>여행 조건 입력</td><td>박 수, 지역, 계절, 동반자</td><td>현재 조건 저장</td><td>선택 조건 표시</td><td>박 수는 1 이상 정수, 나머지는 허용값만 사용</td></tr>
+<tr><td>준비물 필터링</td><td>규칙표, 현재 조건</td><td>항상 또는 조건 일치 항목만 표시</td><td>분류별 목록</td><td>조건은 항상·해외·국내·여름·겨울·아이동반 중 하나</td></tr>
+<tr><td>개수 계산</td><td>박 수, 개수 규칙</td><td>숫자·일수·일수+1·올림(일수/2) 계산</td><td>계산된 수량</td><td>결과는 1 이상의 정수</td></tr>
+<tr><td>준비물 체크</td><td>행 또는 체크 영역 터치</td><td>체크 상태 변경 및 저장</td><td>체크 표시와 진행률</td><td>한 줄 전체가 터치 가능</td></tr>
+<tr><td>직접 추가</td><td>품목명, 개수</td><td>기타 분류에 추가</td><td>추가 항목 표시</td><td>품목명 필수, 개수는 1 이상 정수</td></tr>
+<tr><td>저장·복원</td><td>조건, 체크 상태, 직접 추가 항목</td><td>localStorage 또는 IndexedDB 저장</td><td>앱 재실행 후 복원</td><td>서버 전송 금지</td></tr>
+<tr><td>전체 초기화</td><td>초기화 버튼</td><td>확인 후 체크와 직접 추가 항목 삭제</td><td>진행률 0%</td><td>확인 메시지 필수</td></tr>
+</table>
+<h2>4. 설치와 오프라인</h2>
+<h3>아이폰</h3><p>Safari에서 앱을 연다 → 공유 버튼 → 「홈 화면에 추가」 → 「추가」를 누른다.</p>
+<h3>안드로이드</h3><p>Chrome에서 앱을 연다 → 메뉴 → 「홈 화면에 추가」 또는 「앱 설치」 → 설치한다.</p>
+<p class="note"><b>오프라인 기준:</b> manifest.webmanifest와 sw.js를 연결하고 핵심 파일을 캐시한다. 최초 접속 후 인터넷을 끊어도 조건 계산, 체크, 저장, 초기화가 작동해야 한다.</p>
+<h2>5. 테스트 체크리스트</h2>
+<ol><li>2박·해외·여름·혼자 조건이 저장된다.</li><li>속옷과 양말은 3개, 상의는 2개, 하의는 1개로 계산된다.</li><li>해외 전용 품목이 표시된다.</li><li>국내에서 해외 전용 품목이 숨겨진다.</li><li>여름 품목과 겨울 품목이 올바르게 구분된다.</li><li>아이동반 품목이 표시된다.</li><li>행 전체 터치로 체크된다.</li><li>앱 재실행 후 체크 상태가 유지된다.</li><li>직접 추가 항목이 저장된다.</li><li>오프라인에서 핵심 기능이 작동한다.</li></ol>
+<h2>6. 이번에는 만들지 않을 것</h2>
+<ul><li>로그인·회원가입·계정</li><li>서버 저장·클라우드 동기화</li><li>개인정보 수집</li><li>날씨·항공권·지도 등 외부 API</li><li>공동 편집·공유</li><li>결제·광고·구독</li><li>사진 업로드와 문서 자동 인식</li><li>여행 일정표와 예약 관리</li><li>다국어 및 관리자용 편집 화면</li><li>외부 라이브러리·폰트</li></ul>
+<h2>제작 요청 요약</h2>
+<ol><li>순수 HTML, CSS, JavaScript로 PWA를 만든다.</li><li>파일은 index.html, manifest.webmanifest, sw.js, icons만 사용한다.</li><li>규칙은 index.html의 하나의 데이터 배열에 모은다.</li><li>박 수, 지역, 계절, 동반자 조건을 입력받는다.</li><li>조건에 맞는 준비물과 개수를 표시한다.</li><li>허용된 개수 계산식을 지원한다.</li><li>행 전체 터치 체크와 진행률을 제공한다.</li><li>직접 추가 항목을 기타에 저장한다.</li><li>기록은 휴대폰에만 저장한다.</li><li>초기화와 설치 안내 버튼을 하단 고정한다.</li><li>아이폰·안드로이드 설치와 오프라인 실행을 지원한다.</li><li>작은 화면과 큰 터치 영역을 우선한다.</li><li>테스트 10개를 모두 확인한다.</li></ol>
+</body></html>
